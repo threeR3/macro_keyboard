@@ -25,11 +25,12 @@
 /************************************************
  * Statics
  * *********************************************/
-static uint8_t cur_func_profile = 1;
+static uint8_t cur_func_profile  = 1;
+static uint8_t prev_func_profile = 1;
 static bool changing_profile = false;
 
 static button_func_t *button_profiles[NUM_PROFILES] = {button_func_map_1, button_func_map_2, button_func_map_3};
-static button_func_t *encoder_profiles[NUM_PROFILES] = {encoder_func_map_1, encoder_func_map_3, encoder_func_map_3};
+static button_func_t *encoder_profiles[NUM_PROFILES] = {encoder_func_map_1, encoder_func_map_2, encoder_func_map_3};
 
 
 /************************************************
@@ -139,7 +140,7 @@ void encoder_2_tick_isr()
   encoder_2.tick();
 }
 
-void press_keys(uint8_t *func)
+void press_keys(uint16_t *func)
 {
     if(changing_profile == true)
     {
@@ -148,7 +149,7 @@ void press_keys(uint8_t *func)
 
     for (int i = 0; i < MAX_BUTTON_FUNCS; i++)
     {
-        uint8_t key = *(func + i);
+        uint16_t key = *(func + i);
         switch (key)
         {
         case (VOLUME_UP):
@@ -161,7 +162,37 @@ void press_keys(uint8_t *func)
         case (MEDIA_FAST_FOWARD):
         case (MEDIA_REWIND):
         {
-            MediaKeyboard.press(key);
+            MediaKeyboard.press((uint8_t)(key - 0xFF00));
+            break;
+        }
+        case (KEY_PROFILE1_TEMP):
+        {
+            if (cur_func_profile != 1)
+            {
+                prev_func_profile = cur_func_profile;
+                cur_func_profile = 1;
+            }
+            break;
+        }
+        case (KEY_PROFILE2_TEMP):
+        {
+            if (cur_func_profile != 2)
+            {
+                prev_func_profile = cur_func_profile;
+                cur_func_profile = 2;
+                // char debug_msg[32];
+                // snprintf(debug_msg, 32, "pressed");
+                // oled_debug(debug_msg);
+            }
+            break;
+        }
+        case (KEY_PROFILE3_TEMP):
+        {
+            if (cur_func_profile != 3)
+            {
+                prev_func_profile = cur_func_profile;
+                cur_func_profile = 3;
+            }
             break;
         }
         case (NULL):
@@ -169,12 +200,12 @@ void press_keys(uint8_t *func)
             break;
         }
         default:
-            Keyboard.press(key);
+            Keyboard.press((uint8_t)key);
         }
     }
 }
 
-void release_keys(uint8_t *func)
+void release_keys(uint16_t *func)
 {
     if(changing_profile == true)
     {
@@ -183,7 +214,7 @@ void release_keys(uint8_t *func)
 
     for (int i = 0; i < MAX_BUTTON_FUNCS; i++)
     {
-        uint8_t key = *(func + i);
+        uint16_t key = *(func + i);
         switch (key)
         {
         case (VOLUME_UP):
@@ -199,12 +230,22 @@ void release_keys(uint8_t *func)
             MediaKeyboard.release();
             break;
         }
+        case (KEY_PROFILE1_TEMP):
+        case (KEY_PROFILE2_TEMP):
+        case (KEY_PROFILE3_TEMP):
+        {
+            // char debug_msg[32];
+            // snprintf(debug_msg, 32, "released");
+            // oled_debug(debug_msg);
+            cur_func_profile = prev_func_profile;
+            break;
+        }
         case (NULL):
         {
             break;
         }
         default:
-            Keyboard.release(key);
+            Keyboard.release((uint8_t)key);
         }
     }
 }
@@ -413,6 +454,9 @@ void process_encoders()
 
 void setup()
 {
+
+    Serial.begin(9600);
+
     /* initialize pins */
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
@@ -466,11 +510,6 @@ void loop()
 {
     static uint32_t t_last = 0;
     uint32_t t_now = millis();
-
-    char debug_msg[32];
-
-    // snprintf(debug_msg, 32, "0x%x 0x%x", &en, &profile_1.encoder_map);
-    // oled_debug(debug_msg);
 
     oled_protect(false);
     process_buttons(t_now);

@@ -17,6 +17,13 @@
 #define MAX_BUTTON_FUNCS 3
 #define MAX_MSG_LEN      24
 
+/* These keys will quick switch to the specified profile when pressed and 
+   go back when released */
+#define KEY_PROFILE1_TEMP 0xFF
+#define KEY_PROFILE2_TEMP 0xFE
+#define KEY_PROFILE3_TEMP 0XFD 
+
+
 /************************************************
  * Typedefs 
  * *********************************************/
@@ -24,7 +31,7 @@
 typedef struct
 {
     char msg[MAX_MSG_LEN]; /* OLED message when pressed */
-    uint8_t func[MAX_BUTTON_FUNCS]; /* what keystrokes to send when pressed */
+    uint16_t func[MAX_BUTTON_FUNCS]; /* what keystrokes to send when pressed */
     bool one_shot; /* key action happens once per press */
     bool turbo; /* while key is held, key will act like being spammed */
 

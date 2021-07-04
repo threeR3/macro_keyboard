@@ -31,20 +31,20 @@ button_func_t button_func_map_1[NUM_BUTTONS] =
         },
         {
             "N/A",
-            {NULL, NULL, NULL},
-            false,
-            false,
-        },
-        {
-            "N/A",
-            {NULL, NULL, NULL},
-            false,
-            false,
-        },
-        {
-            "N/A",
             {NULL, NULL , NULL},
             false,
+            false,
+        },
+        {
+            "Prev Tab",
+            {KEY_LEFT_CTRL, KEY_LEFT_SHIFT, KEY_TAB},
+            true,
+            false,
+        },
+        {
+            "Next Tab",
+            {KEY_LEFT_CTRL, KEY_TAB, NULL},
+            true,
             false,
         },
         {
@@ -60,8 +60,8 @@ button_func_t button_func_map_1[NUM_BUTTONS] =
             true,
         },
         {
-            "Ctrl-Alt-.",
-            {KEY_RIGHT_CTRL, KEY_RIGHT_ALT, '.'},
+            "P2 Quick Switch",
+            {KEY_PROFILE2_TEMP, NULL, NULL},
             false,
             false,
         },
@@ -72,7 +72,7 @@ button_func_t button_func_map_1[NUM_BUTTONS] =
             false,
         },
         {
-            "N/A",
+            "Profile Switch",
             {NULL, NULL, NULL},
             false,
             false,

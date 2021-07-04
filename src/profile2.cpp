@@ -6,39 +6,39 @@
 button_func_t button_func_map_2[NUM_BUTTONS] =
     {
         {
-            "1: Play/Pause",
-            {MEDIA_PLAY_PAUSE, NULL, NULL},
+            "Alt",
+            {KEY_LEFT_ALT, NULL, NULL},
+            false,
+            false,
+        },
+        {
+            "Tab",
+            {KEY_TAB, NULL, NULL},
+            false,
+            false,
+        },
+        {
+            "Win <-",
+            {KEY_LEFT_GUI, KEY_LEFT_ARROW, KEY_ESC},
             true,
             false,
         },
         {
-            "2: Prev",
-            {MEDIA_PREV, NULL, NULL},
+            "Win ->",
+            {KEY_LEFT_GUI, KEY_RIGHT_ARROW, KEY_ESC},
             true,
             false,
         },
         {
-            "3: Next",
-            {MEDIA_NEXT, NULL, NULL},
+            "Win ^",
+            {KEY_LEFT_GUI, KEY_UP_ARROW, KEY_ESC},
             true,
             false,
         },
         {
-            "4: Stop",
-            {MEDIA_STOP, NULL, NULL},
+            "Win v",
+            {KEY_LEFT_GUI, KEY_DOWN_ARROW, KEY_ESC},
             true,
-            false,
-        },
-        {
-            "5: N/A",
-            {NULL, NULL, NULL},
-            false,
-            false,
-        },
-        {
-            "6: N/A",
-            {NULL, NULL, NULL},
-            false,
             false,
         },
         {
@@ -54,25 +54,25 @@ button_func_t button_func_map_2[NUM_BUTTONS] =
             false,
         },
         {
-            "9: NUT turbo",
-            {'N', 'U', 'T'},
+            "N/A",
+            {NULL, NULL, NULL},
             false,
             true,
         },
         {
-            "10: Ctrl-Alt-.",
-            {KEY_RIGHT_CTRL, KEY_RIGHT_ALT, '.'},
+            "P1 Quick Switch",
+            {KEY_PROFILE1_TEMP, NULL, NULL},
             false,
             false,
         },
         {
-            "1e: Mute",
-            {VOLUME_MUTE, NULL, NULL},
+            "N/A",
+            {NULL, NULL, NULL},
             true,
             false,
         },
         {
-            "2e: ",
+            "Profile Switch",
             {NULL, NULL, NULL},
             false,
             false,
@@ -83,26 +83,26 @@ button_func_t button_func_map_2[NUM_BUTTONS] =
 button_func_t encoder_func_map_2[NUM_ENCODERS * 2] =
 {
         {
-            "1e+: V+",
-            {VOLUME_UP, NULL, NULL},
+            "N/A",
+            {NULL, NULL, NULL},
             false, /* not implemented for encoders */
             false, /* not implemented for encoders */
         },
         {
-            "1e-: V-",
-            {VOLUME_DOWN, NULL, NULL},
+            "N/A",
+            {NULL, NULL, NULL},
             false,  /* not implemented for encoders */
             false, /* not implemented for encoders */
         },
         {
-            "2e+: FF",
-            {MEDIA_FAST_FOWARD, NULL, NULL},
+            "N/A",
+            {NULL, NULL, NULL},
             false, /* not implemented for encoders */
             false, /* not implemented for encoders */
         },
         {
-            "2e-: RW",
-            {MEDIA_REWIND, NULL, NULL},
+            "N/A",
+            {NULL, NULL, NULL},
             false, /* not implemented for encoders */
             false, /* not implemented for encoders */
         },
